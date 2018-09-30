@@ -1,4 +1,4 @@
-package huang.bling.habitcounter.Fragment;
+package huang.bling.habitcounter.UI.Fragment;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import huang.bling.habitcounter.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChartFragment extends Fragment {
+public class AchieveFragment extends Fragment {
 
 
-    public ChartFragment() {
+    public AchieveFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class ChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chart, container, false);
+        return inflater.inflate(R.layout.fragment_achieve, container, false);
     }
 
 }

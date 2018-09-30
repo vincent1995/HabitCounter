@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="MainA_tablayout_main_label">Main</string>
+    <string name="MainA_tablayout_chart_label">Chart</string>
+    <string name="MainA_tablayout_achieve_label">Achieve</string>
 </resources>

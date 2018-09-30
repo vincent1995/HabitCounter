@@ -1,12 +1,12 @@
-package huang.bling.habitcounter;
+package huang.bling.habitcounter.UI;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import huang.bling.habitcounter.Fragment.AchieveFragment;
-import huang.bling.habitcounter.Fragment.ChartFragment;
-import huang.bling.habitcounter.Fragment.MainFragment;
+import huang.bling.habitcounter.UI.Fragment.AchieveFragment;
+import huang.bling.habitcounter.UI.Fragment.ChartFragment;
+import huang.bling.habitcounter.UI.Fragment.MainFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
