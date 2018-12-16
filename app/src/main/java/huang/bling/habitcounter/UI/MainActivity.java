@@ -2,6 +2,7 @@ package huang.bling.habitcounter.UI;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,31 +22,21 @@ import huang.bling.habitcounter.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    MyViewModel viewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // set up Counter
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MyViewModel.class);
-        viewModel.getCounter().getValue().loadData(this);
         initMainActivityUI();
-
     }
 
     @Override
     protected void onDestroy() {
-        viewModel.getCounter().getValue().saveData(this);
         super.onDestroy();
     }
 
     //Main Activity UI
     void initMainActivityUI(){
         setContentView(R.layout.activity_main);
-
-        ///////////////////////////////
-        // set up Main Activity
-
         // set up ViewPager and TabLayout
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager pager = findViewById(R.id.pager_view);

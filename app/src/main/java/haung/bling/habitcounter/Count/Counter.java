@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class Counter {
 
+    public String s = "test String";
     int MS_IN_ONE_DAY = 24*60*60*1000;
     private ArrayList<Date> countData;
     private IntervalStatic sevenDaySta;

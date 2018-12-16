@@ -3,6 +3,7 @@ package huang.bling.habitcounter.UI.Fragment;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import haung.bling.habitcounter.Count.Counter;
+import haung.bling.habitcounter.Count.Util;
 import huang.bling.habitcounter.R;
+import huang.bling.habitcounter.UI.MainActivity;
 import huang.bling.habitcounter.UI.MyViewModel;
 
 
@@ -22,41 +25,36 @@ import huang.bling.habitcounter.UI.MyViewModel;
  */
 //TODO show static data below the add button
 public class MainFragment extends Fragment {
-    private MyViewModel viewModel;
+    MyViewModel viewModel;
     TextView max_val;
     TextView cur_val;
+    Button button_add;
 
-    public MainFragment() {
-    }
+
+    /** Init Fragment */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         container =  (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
         max_val =  container.findViewById(R.id.MainF_max_val);
         cur_val =  container.findViewById(R.id.MainF_cur_val);
-        Button button_add =  container.findViewById(R.id.MainF_button_add);
-        button_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.addRecord();
-                updateUI();
-            }
-        });
-        updateUI();
+        button_add =  container.findViewById(R.id.MainF_button_add);
         return container;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //init viewModel
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(MyViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        Util.makeToast(viewModel.getCounter().s,getContext());
     }
 
-    void updateUI(){
-        max_val.setText(String.valueOf(viewModel.getCounter().getValue().getMaxDay()));
-        cur_val.setText(String.valueOf(viewModel.getCounter().getValue().getCurDay()));
+    /** Define onClick Event */
+
+    public void onClickAddButton(View view){
+        viewModel.getCounter().s = "changed string";
     }
+
+
 }
