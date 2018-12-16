@@ -25,10 +25,14 @@ import huang.bling.habitcounter.UI.MyViewModel;
  */
 //TODO show static data below the add button
 public class MainFragment extends Fragment {
-    MyViewModel viewModel;
-    TextView max_val;
-    TextView cur_val;
-    Button button_add;
+    Counter counter;
+    TextView max_duration;
+    TextView cur_duration;
+    TextView last7d_count;
+    TextView last30d_count;
+    TextView last1y_count;
+    TextView total_count;
+    Button addButton;
 
 
     /** Init Fragment */
@@ -37,24 +41,47 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         container =  (ViewGroup) inflater.inflate(R.layout.fragment_main, container, false);
-        max_val =  container.findViewById(R.id.MainF_max_val);
-        cur_val =  container.findViewById(R.id.MainF_cur_val);
-        button_add =  container.findViewById(R.id.MainF_button_add);
+        max_duration =  container.findViewById(R.id.MainF_max_val);
+        cur_duration =  container.findViewById(R.id.MainF_cur_val);
+        last7d_count = container.findViewById(R.id.MainF_last7d_value);
+        last30d_count = container.findViewById(R.id.MainF_last30d_value);
+        last1y_count = container.findViewById(R.id.MainF_last1y_value);
+        total_count = container.findViewById(R.id.MainF_total_value);
+        addButton = container.findViewById(R.id.MainF_button_add);
+        addButtonHandler();
         return container;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-        Util.makeToast(viewModel.getCounter().s,getContext());
+        counter = ViewModelProviders.of(getActivity()).get(MyViewModel.class).getCounter();
     }
 
-    /** Define onClick Event */
-
-    public void onClickAddButton(View view){
-        viewModel.getCounter().s = "changed string";
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateUI();
     }
 
+    /** Handle event */
+    public void addButtonHandler(){
+        // Add button
+        addButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                counter.addRecord();
+                updateUI();
+            }
+        });
+    }
 
+    public void updateUI(){
+        max_duration.setText(String.valueOf(counter.getMax()));
+        cur_duration.setText(String.valueOf(counter.getCur()));
+        last7d_count.setText(String.valueOf(counter.getRecentCount(7)));
+        last30d_count.setText(String.valueOf(counter.getRecentCount(30)));
+        last1y_count.setText(String.valueOf(counter.getRecentCount(365)));
+        total_count.setText(String.valueOf(counter.getTotalCount()));
+    }
 }
