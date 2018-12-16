@@ -34,12 +34,15 @@ public class Counter {
         totalSta = new IntervalStatic(0,true);
         maxDay = 0;
         curDay = 0;
+
+        countData.add(new Date(117,11,10));
+        countData.add(new Date(118,11,10));
     }
 
-    public void loadData(Context context){
+    public boolean loadData(Context context){
         File file = new File("counter_data");
         if(!file.exists())
-            return;
+            return false;
 
         FileInputStream inputStream;
         SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,15 +53,17 @@ public class Counter {
             String s = new String(b);
             Log.d(Counter.class.toString(),s);
             Date date = fm.parse(s);
+            inputStream.close();
+            return true;
         }
         catch(FileNotFoundException exc){
-            return;
+            return false;
         }
         catch(IOException exc){
-            return;
+            return false;
         }
         catch(ParseException exc){
-            return;
+            return false;
         }
 
     }
@@ -75,11 +80,13 @@ public class Counter {
                 String data = fm.format(countData.get(i));
                 outputStream.write(data.getBytes());
             }
+            outputStream.close();
         }catch(FileNotFoundException exc){
-
+            return false;
         }catch(IOException exc){
-
+            return false;
         }
+
         return true;
     }
 
@@ -93,7 +100,7 @@ public class Counter {
         curDay = countCur();
     }
 
-    int countMax(){
+    public int countMax(){
         long max = 0;
         for(int i = 0;i<countData.size()-1;i++){
             Date left = countData.get(i);
@@ -110,10 +117,16 @@ public class Counter {
         return (int)max;
     }
 
-    int countCur(){
-        long gap = (   (new Date()).getTime() - countData.get(countData.size()-1).getTime() ) / MS_IN_ONE_DAY;
-        return (int)gap;
+    public int countCur(){
+        Date d1=new Date();
+        Date d2=countData.get(countData.size()-1);
+        long minus=d1.getTime()-d2.getTime();
+        int r=(int)minus/MS_IN_ONE_DAY;
+        //System.out.println(r);
+        //double gap = (   (new Date()).getTime() - countData.get(countData.size()-1).getTime() ) / MS_IN_ONE_DAY;
+        return r;
     }
+
 
     ////////////////////////////////////////
     // interface
@@ -133,10 +146,12 @@ public class Counter {
     }
 
     public int getMaxDay(){
+        maxDay=countMax();
         return maxDay;
     }
 
     public int getCurDay(){
+        curDay=countCur();
         return curDay;
     }
 
