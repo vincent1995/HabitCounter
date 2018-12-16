@@ -121,5 +121,11 @@ public class Counter {
         Date today = new Date();
         habit_log.add(today);
     }
+
+    public ArrayList<Integer> counterNumberInEachPeriod(int gap){
+        ArrayList<Integer> counts = new ArrayList<>();
+
+        return counts;
+    }
 }
 
