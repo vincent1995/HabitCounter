@@ -9,7 +9,7 @@ import haung.bling.habitcounter.Count.Counter;
 public class MyViewModel extends ViewModel {
     //TODO viewmodel has problem.
     private MutableLiveData<Counter> counter = new MutableLiveData<>();
-    MyViewModel(){
+    public MyViewModel(){
         counter.setValue(new Counter());
     }
     public Counter getCounter(){
