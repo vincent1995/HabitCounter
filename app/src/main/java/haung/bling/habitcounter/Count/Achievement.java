@@ -23,21 +23,28 @@ public class Achievement {
             case 4:
                 break;
         }
+        if(x%2==0) return true;
         return false;
     }
     public String getDescription(int x){
+        String result="";
         switch(x){
             case 0:
+                result = "Diet";
                 break;
             case 1:
+                result = "Gym";
                 break;
             case 2:
+                result = "Study";
                 break;
             case 3:
+                result = "Endurance";
                 break;
             case 4:
+                result = "Alcholic";
                 break;
         }
-        return "This is description";
+        return result;
     }
 }

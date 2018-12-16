@@ -34,15 +34,13 @@ public class AchieveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v=new View(getActivity());
-        LinearLayout vv=(LinearLayout)inflater.inflate(R.layout.fragment_achieve,container,false);
-        vv.setBackgroundColor(Color.GREEN);
-
+        LinearLayout v=(LinearLayout)inflater.inflate(R.layout.fragment_achieve,container,false);
+        v.setBackgroundColor(Color.GREEN);
         for(int i=0;i<myAchievement.getSize();i++){
-            LinearLayout list=(LinearLayout)vv.findViewById(R.id.achieve_list);
+            LinearLayout list=(LinearLayout)v.findViewById(R.id.achieve_list);
             CardView cv=new CardView(super.getActivity());
             TextView tv=new TextView(super.getContext());
-            tv.setText("hahahahaha");
+            tv.setText(myAchievement.getDescription(i));
             if(myAchievement.calculateAchievement(i)){
                 cv.setCardBackgroundColor(Color.WHITE);
             }
